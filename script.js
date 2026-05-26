@@ -1,15 +1,33 @@
 const express = require("express");
 const path = require("path");
+const { Pool } = require("pg");
+
+require("dotenv").config();
 
 const app = express();
 const port = 3000;
 
+
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 
 app.get("/", (req, res) => {
     res.render("index", { title: "Home" });
@@ -35,6 +53,8 @@ app.get("/donations", (req, res) => {
     res.render("donations", { title: "Donations" });
 });
 
+
+
 app.post("/contact", (req, res) => {
     console.log(req.body);
     res.redirect("/contact");
@@ -49,6 +69,19 @@ app.post("/signup", (req, res) => {
     console.log(req.body);
     res.redirect("/login");
 });
+
+
+
+app.get("/test-db", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT NOW()");
+        res.send(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Database connection failed");
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
