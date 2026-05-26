@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.render("homepage", { title: "Home" });
+    res.render("index", { title: "Home" });
 });
 
 app.get("/faq", (req, res) => {
