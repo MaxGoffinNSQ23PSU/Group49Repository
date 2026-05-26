@@ -1,0 +1,25 @@
+{
+  "name": "group49repository",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxGoffinNSQ23PSU/Group49Repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MaxGoffinNSQ23PSU/Group49Repository/issues"
+  },
+  "homepage": "https://github.com/MaxGoffinNSQ23PSU/Group49Repository#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}
