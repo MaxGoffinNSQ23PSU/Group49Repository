@@ -2,7 +2,9 @@ const express = require("express");
 const path = require("path");
 const { Pool } = require("pg");
 
+
 require("dotenv").config();
+console.log(process.env.DATABASE_URL);
 
 const app = express();
 const port = 3000;
@@ -69,6 +71,53 @@ app.post("/signup", (req, res) => {
     console.log(req.body);
     res.redirect("/login");
 });
+
+app.get("/test", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT * 
+            FROM test 
+        `);
+        res.render("test", {
+            
+            title: "Test",
+            tests: result.rows,
+            error: null
+            
+        });
+    } catch (err) {
+        console.error(err);
+        res.render("test", { 
+           
+            title: "Test",
+            tests: [], 
+            error: "Could not load test data"
+            
+        });
+    }
+});
+
+app.post("/test", async (req, res) => {
+    const { id, test } = req.body;
+    try {
+        await pool.query(`
+            INSERT INTO test (test)
+            VALUES ($1)
+        `, [test]);
+
+        res.redirect("/test");
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("test", {
+            title: "Test",
+            tests: [],
+            error: "Failed to submit"
+        });
+    }
+});
+
 
 
 

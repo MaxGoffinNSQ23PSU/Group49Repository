@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a href="/donations">Donations</a>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+</nav>
+
+<main>
+    <h1><%= title %></h1>
+    <p>Page content goes here.</p>
+
+
+
+    <form action="/test" method="POST">
+                                
+                <label>Message:</label>
+                <input type="text" name="test" required>
+                <br><br>
+                <button type="submit">Submit</button>
+            </form>
+
+
+
+
+            
+        <br><br>
+        <h3>test</h3>
+        
+            <% tests.forEach(test => { %>
+
+                <div>
+                    <br><hr><br>
+
+                    <h4>ID: <%= test.id %></h4>
+
+                    <p><%= test.test %></p>
+
+                </div>
+
+            <% }) %>
+
+           
+</main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
