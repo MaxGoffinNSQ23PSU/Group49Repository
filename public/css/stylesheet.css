@@ -45,3 +45,25 @@ button {
 button:hover {
     background: #5f1645;
 }
+
+#map {
+    height: 500px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.location-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.location-search input {
+    flex: 1;
+    margin: 0;
+}
+
+.location-search button {
+    width: auto;
+    margin: 0;
+}

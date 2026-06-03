@@ -1,26 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/stylesheet.css">
-</head>
-<body>
-
-<nav>
-    <a href="/">Home</a>
-    <a href="/faq">FAQ</a>
-    <a href="/contact">Contact</a>
-    <a href="/donations">Donations</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign Up</a>
-</nav>
+<%- include('../partials/header') %>
 
 <main>
-    <h1><%= title %></h1>
-    <p>Page content goes here.</p>
+    <h1>Food Banks in Ladywood, Birmingham</h1>
+    <p>Find your nearest food bank. Click a pin to see details and available stock.</p>
+
+    <div class="location-search">
+        <input type="text" id="address-input" placeholder="Enter your address or postcode...">
+        <button onclick="searchAddress()">Find me</button>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <div id="map"></div>
 </main>
 
-<script src="/js/script.js"></script>
-</body>
-</html>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const foodbanks = <%- JSON.stringify(foodbanks) %>;
+
+    const map = L.map('map').setView([52.4862, -1.9090], 14);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO'
+    }).addTo(map);
+
+    foodbanks.forEach(bank => {
+        L.marker([bank.latitude, bank.longitude])
+            .addTo(map)
+            .bindPopup(`
+                <b>${bank.name}</b><br>
+                ${bank.address}<br><br>
+                <a href="/foodbanks/${bank.id}">View details →</a>
+            `);
+    });
+
+    let userMarker = null;
+
+    async function searchAddress() {
+        const address = document.getElementById('address-input').value;
+        if (!address) return;
+
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`
+        );
+        const data = await response.json();
+
+        if (data.length === 0) {
+            alert('Address not found — try adding Birmingham or a postcode.');
+            return;
+        }
+
+        const { lat, lon } = data[0];
+
+        if (userMarker) map.removeLayer(userMarker);
+
+        userMarker = L.circleMarker([lat, lon], {
+            radius: 10,
+            fillColor: '#e63946',
+            color: '#fff',
+            weight: 2,
+            fillOpacity: 0.9
+        }).addTo(map).bindPopup('You are here').openPopup();
+
+        map.setView([lat, lon], 15);
+    }
+</script>
+
+<%- include('../partials/footer') %>
