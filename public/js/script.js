@@ -55,10 +55,6 @@ app.get("/donations", (req, res) => {
     res.render("donations", { title: "Donations" });
 });
 
-app.get("/settings", (req, res) => {
-    res.render("settings", { title: "Settings" });
-});
-
 
 
 app.post("/contact", (req, res) => {
