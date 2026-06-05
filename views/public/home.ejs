@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<main>
+<main class="home">
     <h1>Food Banks in Ladywood, Birmingham</h1>
     <p>Find your nearest food bank. Click a pin to see details and available stock.</p>
 
@@ -9,32 +9,85 @@
         <button onclick="searchAddress()">Find me</button>
     </div>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <div id="map"></div>
+    <div class="map-wrapper">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+        <div id="map"></div>
+
+        <div id="details-panel" class="details-panel hidden">
+            <button class="close-btn" onclick="closePanel()">✕</button>
+            <div id="panel-content"></div>
+        </div>
+    </div>
 </main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+
+    // Pass food bank data from the server into a JS variable
+    // The route queried the database and passed this array to the view
     const foodbanks = <%- JSON.stringify(foodbanks) %>;
 
+    // Initialise the map centred on Ladywood, Birmingham
     const map = L.map('map').setView([52.4862, -1.9090], 14);
 
+    // Load map tiles from CartoDB
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap contributors © CARTO'
     }).addTo(map);
 
+    // Loop through each food bank and place a marker at its coordinates
+    // When the marker is clicked, load that food bank's details into the side panel
     foodbanks.forEach(bank => {
-        L.marker([bank.latitude, bank.longitude])
-            .addTo(map)
-            .bindPopup(`
-                <b>${bank.name}</b><br>
-                ${bank.address}<br><br>
-                <a href="/foodbanks/${bank.id}">View details →</a>
-            `);
+        const marker = L.marker([bank.latitude, bank.longitude]).addTo(map);
+        marker.on('click', () => loadDetails(bank.id));
     });
 
-    let userMarker = null;
+    // Fetches food bank details from the server and renders them in the side panel
+    async function loadDetails(id) {
+        const response = await fetch(`/foodbanks/${id}/data`);
+        const data = await response.json();
 
+        const { foodbank, listings } = data;
+
+        // Build the stock listings HTML
+        const listingsHTML = listings.length === 0
+            ? '<p>No stock information available.</p>'
+            : listings.map(item => `
+                <div class="listing-card">
+                    <h3>${item.item_name}</h3>
+                    <p>${item.quantity} ${item.unit}</p>
+                    ${item.tags && item.tags[0] !== null
+                        ? `<div class="tags">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+                        : ''}
+                </div>
+            `).join('');
+
+        // Inject the food bank details into the panel
+        document.getElementById('panel-content').innerHTML = `
+            <h2>${foodbank.name}</h2>
+            <p>${foodbank.address}</p>
+            <p><strong>Opening times:</strong> ${foodbank.opening_times}</p>
+            <button onclick="getDirections(${foodbank.latitude}, ${foodbank.longitude})">
+                Get Directions
+            </button>
+            <h3>Available Stock</h3>
+            ${listingsHTML}
+        `;
+
+        document.getElementById('details-panel').classList.remove('hidden');
+    }
+
+    function closePanel() {
+        document.getElementById('details-panel').classList.add('hidden');
+    }
+
+    // Opens Google Maps in a new tab with the food bank set as the destination
+    function getDirections(lat, lon) {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
+        window.open(url, '_blank');
+    }
+
+    // Takes the address the user typed, converts it to coordinates using Nominatim
     async function searchAddress() {
         const address = document.getElementById('address-input').value;
         if (!address) return;
@@ -51,8 +104,10 @@
 
         const { lat, lon } = data[0];
 
+        // Remove the previous user marker if one already exists
         if (userMarker) map.removeLayer(userMarker);
 
+        // Place a red circle marker to distinguish the user's location from food bank pins
         userMarker = L.circleMarker([lat, lon], {
             radius: 10,
             fillColor: '#e63946',
@@ -61,8 +116,21 @@
             fillOpacity: 0.9
         }).addTo(map).bindPopup('You are here').openPopup();
 
+        // Re-centre the map on the user's location
         map.setView([lat, lon], 15);
     }
+
+    // Tracks the user's location marker so it can be removed before placing a new one
+    let userMarker = null;
+
+    document.querySelector('.burger').addEventListener('click', () => {
+    document.querySelector('.header nav').classList.toggle('open');
+    });
+
+    window.addEventListener('resize', () => {
+    map.invalidateSize();
+    });
+
 </script>
 
 <%- include('../partials/footer') %>
