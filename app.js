@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
 
 const indexRoutes = require("./src/routes/index");
 const adminRoutes = require("./src/routes/admin");
@@ -13,6 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({ secret: process.env.SESSION_SECRET || 'changeme', resave: false, saveUninitialized: false }));
 
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
