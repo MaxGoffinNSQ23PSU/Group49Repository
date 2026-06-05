@@ -122,6 +122,15 @@
 
     // Tracks the user's location marker so it can be removed before placing a new one
     let userMarker = null;
+
+    document.querySelector('.burger').addEventListener('click', () => {
+    document.querySelector('.header nav').classList.toggle('open');
+    });
+
+    window.addEventListener('resize', () => {
+    map.invalidateSize();
+    });
+
 </script>
 
 <%- include('../partials/footer') %>
