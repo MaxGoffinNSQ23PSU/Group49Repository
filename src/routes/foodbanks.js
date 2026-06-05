@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
+import pool from "../db/index.js";
+
 const router = express.Router();
-// Import the database pool from src/db/index.js to run queries
-const pool = require("../db");
 
 // GET /foodbanks/:id/data
 // Returns food bank details as JSON
@@ -77,4 +77,4 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

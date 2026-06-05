@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import bcrypt from "bcrypt";
+import pool from "../db/index.js";
+
 const router = express.Router();
-const pool = require("../db");
-const bcrypt = require("bcrypt");
 
 // Auth middleware
 function requireAdmin(req, res, next) {
@@ -119,4 +120,4 @@ router.get("/logout", (req, res) => {
     res.redirect("/admin/login");
 });
 
-module.exports = router;
+export default router;
