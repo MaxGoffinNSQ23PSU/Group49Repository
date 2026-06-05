@@ -17,7 +17,7 @@ app.set("views", join(__dirname, "views"));
 app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({ secret: process.env.SESSION_SECRET || 'changeme', resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SESSION_SECRET || "changeme", resave: false, saveUninitialized: false }));
 
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
