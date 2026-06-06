@@ -10,17 +10,13 @@ if (burger && nav) {
 
 //light themese
 function applyTheme(theme) {
-    
     document.body.classList.remove('dark', 'high-contrast');
 
-    
     if (theme === 'dark') document.body.classList.add('dark');
     if (theme === 'high_contrast') document.body.classList.add('high-contrast');
 
-    
     localStorage.setItem('theme', theme);
 }
-
 
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) applyTheme(savedTheme);
