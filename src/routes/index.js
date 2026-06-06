@@ -31,14 +31,10 @@ router.get("/donations", (req, res) => {
     res.render("public/donations", { title: "Donations" });
 });
 
-router.get("/signup", (req, res) => {
-    res.render("public/signup", { title: "Sign Up" });
+router.get("/settings", (req, res) => {
+    res.render("public/settings", { title: "Settings" });
 });
 
-router.post("/signup", (req, res) => {
-    console.log(req.body);
-    res.redirect("/login");
-});
 
 router.get("/login", (req, res) => {
     res.render("public/login", { title: "Login" });

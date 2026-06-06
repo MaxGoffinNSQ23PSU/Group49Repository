@@ -221,3 +221,77 @@ main.home {
         display: flex;
     }
 }
+
+/* Dark theme */
+body.dark {
+    background: #1a1a1a;
+    color: #eee;
+}
+
+body.dark main {
+    background: #2a2a2a;
+    color: #eee;
+}
+
+body.dark main.home {
+    background: transparent;
+}
+
+body.dark .header {
+    background: #111;
+}
+
+body.dark .listing-card {
+    background: #333;
+    border-color: #555;
+}
+
+body.dark .details-panel {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #eee;
+}
+
+/* High contrast theme */
+body.high-contrast {
+    background: #000;
+    color: #fff;
+}
+
+body.high-contrast main {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+body.high-contrast main.home {
+    background: transparent;
+    border: none;
+}
+
+body.high-contrast .header {
+    background: #000;
+    border-bottom: 2px solid #fff;
+}
+
+body.high-contrast .listing-card {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+body.high-contrast .tag {
+    background: #fff;
+    color: #000;
+}
+
+body.high-contrast .details-panel {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+body.high-contrast button {
+    background: #fff;
+    color: #000;
+}
