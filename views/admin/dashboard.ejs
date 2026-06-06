@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+<body>
+
 <%- include('../partials/header') %>
 
 <main>
@@ -53,24 +62,27 @@
 
     <!-- Add new item -->
     <h2 style="margin-top:40px;">Add New Item</h2>
-<form action="/admin/stock/add" method="POST">
-    <input type="text" name="item_name" placeholder="Item name (e.g. Baked Beans)" required>
-    <input type="number" name="quantity" placeholder="Quantity" min="0" required>
-    <input type="text" name="unit" placeholder="Unit (e.g. tins, kg) — optional">
-    <div style="margin-bottom:15px;">
-        <strong>Tags:</strong><br>
-        <% tags.forEach(tag => { %>
-            <label style="margin-right:10px;">
-                <input type="checkbox" name="tag_ids" value="<%= tag.id %>">
-                <%= tag.tag_name %>
-            </label>
-        <% }) %>
-    </div>
-    <button type="submit">Add Item</button>
-</form>
+    <form action="/admin/stock/add" method="POST">
+        <input type="text" name="item_name" placeholder="Item name (e.g. Baked Beans)" required>
+        <input type="number" name="quantity" placeholder="Quantity" min="0" required>
+        <input type="text" name="unit" placeholder="Unit (e.g. tins, kg) — optional">
+        <div style="margin-bottom:15px;">
+            <strong>Tags:</strong><br>
+            <% tags.forEach(tag => { %>
+                <label style="margin-right:10px;">
+                    <input type="checkbox" name="tag_ids" value="<%= tag.id %>">
+                    <%= tag.tag_name %>
+                </label>
+            <% }) %>
+        </div>
+        <button type="submit">Add Item</button>
+    </form>
 
     <br>
     <a href="/admin/logout">Log out</a>
 </main>
 
 <%- include('../partials/footer') %>
+
+</body>
+</html>

@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/stylesheet.css">
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
 
-<nav>
-    <a href="/">Home</a>
-    <a href="/faq">FAQ</a>
-    <a href="/contact">Contact</a>
-    <a href="/donations">Donations</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign Up</a>
-</nav>
+<%- include('../partials/header') %>
 
 <main>
+
     <h1><%= title %></h1>
-    <p>Page content goes here.</p>
+    <div class="loginBox">
+		<label>
+			<input type = "email" id="login" placeholder="Email" required><br>
+			<input type = "password" id="password" placeholder="Password" required><br>
+			<input type="submit" id="LoginButton" class="btn" value="Login"><br>
+		</label>
+	</div>
+	
+
 </main>
+
+
+
+<%- include('../partials/footer') %>
 
 <script src="/js/script.js"></script>
 </body>
