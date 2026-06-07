@@ -213,6 +213,18 @@ main.home {
 	width: 250px;
 	border-radius: 40px;
 	margin-top: 40px;
+	border: none;
+	background-color: #7b1e5a;
+	color: white;
+}
+
+.btn:hover{
+	color: black;
+	background-color: lightgray;
+	cursor: pointer;
+  	display: inline-block;
+  	position: relative;
+  	transition: 0.5s;
 }
 
 /* Mobile — stack map and panel vertically */
