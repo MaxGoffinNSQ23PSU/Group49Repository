@@ -183,18 +183,36 @@ main.home {
 }
 
 .loginBox {
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
+  	display: grid;
+	place-items: center;
+	margin: 60px;
 }
 
 #login {
-	width: 400px;
+	width: 270px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom-width: 1px;
+	text-align: center;
+	padding: 20px;
 	
 }
 
 #password{
-	width: 400px;
+	width: 270px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom-width: 1px;
+	text-align: center;
+	padding: 20px;
+}
+
+.btn{
+	width: 250px;
+	border-radius: 40px;
+	margin-top: 40px;
 }
 
 /* Mobile — stack map and panel vertically */
