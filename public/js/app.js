@@ -1,9 +1,13 @@
 // Mobile
-const burger = document.getElementById("burger");
-const nav = document.querySelector(".header nav");
-burger.addEventListener("click", () => {
-	nav.classList.toggle("open");
-});
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.header nav');
+
+if (burger && nav) {
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    burger.classList.toggle('open');
+  });
+}
 
 if (burger && nav) {
     burger.addEventListener("click", () => {
