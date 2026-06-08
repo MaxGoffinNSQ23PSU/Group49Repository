@@ -47,10 +47,6 @@ router.post("/login", (req, res) => {
 router.get('/faq', (req, res) => {
     const faqs = [
         {
-            question: "Do I need a referral to use a food bank?",
-            answer: "Most food banks in Ladywood accept self-referrals. Some may require a referral from a GP, social worker, or local charity. Check the individual food bank details for more information."
-        },
-        {
             question: "Is the food free?",
             answer: "Yes. All food banks listed on this site provide food completely free of charge to anyone in need."
         },
