@@ -328,7 +328,6 @@ main.home {
     }
 
     .header nav {
-        display: none;
         position: absolute;
         top: 60px;
         left: 0;
@@ -337,10 +336,19 @@ main.home {
         flex-direction: column;
         padding: 10px 0;
         z-index: 1000;
+
+		opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+
+		transition: opacity 0.25s ease, transform 0.25s ease;
+
     }
 
     .header nav.open {
-        display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
     }
 
     .header nav select {
@@ -400,6 +408,11 @@ body.high-contrast main.home {
 }
 
 body.high-contrast .header {
+    background: #000;
+    border-bottom: 2px solid #fff;
+}
+
+body.high-contrast .header nav{
     background: #000;
     border-bottom: 2px solid #fff;
 }
