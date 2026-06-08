@@ -8,14 +8,43 @@
 </head>
 <body>
 
-<%- include('../partials/header') %>
+	<%- include('../partials/header') %>
 
-<main>
-	<h1><%= title %></h1>
-	<p>Page content goes here.</p>
-</main>
-
-<%- include('../partials/footer') %>
+	<main>
+		<h1>Frequently Asked Questions</h1>
+		<hr>
+	
+		<div class="faq-container">
+			<% faqs.forEach(faq => { %>
+				<div class="faq-item">
+					<button class="faq-question" onclick="toggleAnswer(this)">
+						<%= faq.question %>
+						<span>+</span>
+					</button>
+					<div class="faq-answer">
+						<p><%= faq.answer %></p>
+					</div>
+				</div>
+			<% }) %>
+		</div>
+	</main>
+	
+	<script>
+		function toggleAnswer(button) {
+			const answer = button.nextElementSibling;
+			const symbol = button.querySelector('span');
+	
+			if (answer.style.display === 'none' || answer.style.display === '') {
+				answer.style.display = 'block';
+				symbol.textContent = '-';
+			} else {
+				answer.style.display = 'none';
+				symbol.textContent = '+';
+			}
+		}
+	</script>
+	
+	<%- include('../partials/footer') %>
 
 <script src="/js/app.js"></script>
 </body>
