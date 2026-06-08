@@ -1,9 +1,15 @@
 // Mobile
-const burger = document.getElementById(".burger");
+const burger = document.getElementById("burger");
 const nav = document.querySelector(".header nav");
 burger.addEventListener("click", () => {
 	nav.classList.toggle("open");
 });
+
+if (burger && nav) {
+    burger.addEventListener("click", () => {
+        nav.classList.toggle("open");
+    });
+}
 
 // Interface themes
 const themeSelects = document.querySelectorAll(".theme-select");
