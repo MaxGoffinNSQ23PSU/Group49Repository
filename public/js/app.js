@@ -1,5 +1,5 @@
 // Mobile
-const burger = document.getElementById("burger");
+const burger = document.getElementById(".burger");
 const nav = document.querySelector(".header nav");
 burger.addEventListener("click", () => {
 	nav.classList.toggle("open");
@@ -28,6 +28,18 @@ for (const select of themeSelects) {
 }
 
 applyTheme(localStorage.getItem('theme') || 'light');
+
+// Google translate 
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {
+      pageLanguage: 'en',
+      includedLanguages: 'en,es,fr,ar,ur,pl,ro',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    },
+    'google_translate_element'
+  );
+}
 
 // Text to speech, ref: https://github.com/mdn/dom-examples/blob/main/web-speech-api/speak-easy-synthesis
 const supportsSpeech = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
