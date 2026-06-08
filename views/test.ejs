@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%= title %></title>
 	<link rel="stylesheet" href="/css/stylesheet.css">
 </head>
@@ -10,12 +11,9 @@
 <%- include('../partials/header') %>
 
 <main>
-    <h1><%= title %></h1>
-    <p>Page content goes here.</p>
-
-
-
-    <form action="/test" method="POST">                                
+	<h1><%= title %></h1>
+	<p>Page content goes here.</p>
+	<form action="/test" method="POST">                                
 		<label>Message:</label>
 		<input type="text" name="test" required>
 		<br><br>
@@ -31,6 +29,9 @@
 		</div>
 	<% }) %>           
 </main>
-<script src="/js/script.js"></script>
+
+<%- include('../partials/footer') %>
+
+<script src="/js/app.js"></script>
 </body>
 </html>

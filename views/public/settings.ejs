@@ -11,18 +11,46 @@
 <%- include('../partials/header') %>
 
 <main>
+	<h1>Settings</h1>
+	<hr>
 
-    <h2>Settings</h2>
+	<h2>Display</h2>
+	<section class="horizontal-container">
+		<label for="settings-theme">Colour Theme</label>
+		<select id="settings-theme" class="theme-select">
+			<option value="light">Light</option>
+			<option value="dark">Dark</option>
+			<option value="high_contrast">High Contrast</option>
+		</select>
+	</section>
 
-    <br><hr><br>
-
-    <div class="horizontal-container">
-    <span>Colour Theme</span>
-    <button onclick="applyTheme('light')">☀️ Light</button>
-    <button onclick="applyTheme('dark')">🌙 Dark</button>
-    <button onclick="applyTheme('high_contrast')">⬛ High Contrast</button>
-</div>
-
+	<h2>Speech</h2>
+	<section class="speech-controls speech-settings">
+		<label>
+			Voice
+			<select class="speech-voice"></select>
+		</label>
+		<label>
+			Rate
+			<input class="speech-rate" type="range" min="0.5" max="2" step="0.1" value="1">
+			<span class="speech-rate-value">1</span>
+		</label>
+		<label>
+			Pitch
+			<input class="speech-pitch" type="range" min="0" max="2" step="0.1" value="1">
+			<span class="speech-pitch-value">1</span>
+		</label>
+		<label>
+			Read on hover
+			<input class="speech-read-hover" type="checkbox">
+		</label>
+		<button class="speech-read" type="button">Read page</button>
+		<button class="speech-stop" type="button">Stop</button>
+	</section>
 </main>
 
 <%- include('../partials/footer') %>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

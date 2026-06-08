@@ -1,5 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 100%;
+	width: 100%;
+}
+
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
     background: #f5f5f5;
     color: #222;
@@ -13,13 +25,20 @@ body {
     background: #7b1e5a;
     padding: 0 20px;
     height: 60px;
+	column-gap: 8px;
 }
 
-.logo {
+.header-logo {
     color: white;
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
+}
+
+.header-settings {
+	display: flex;
+	column-gap: 8px;
+	margin-left: auto;
 }
 
 .header nav {
@@ -45,6 +64,14 @@ body {
     margin: 0;
     padding: 5px;
     border-radius: 4px;
+}
+
+.theme-select {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 8px;
+    font-size: 15px;
 }
 
 .burger {
@@ -215,6 +242,45 @@ main.home {
 	margin-top: 40px;
 }
 
+.horizontal-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.site-footer {
+    background: #7b1e5a;
+    color: white;
+    padding: 24px 30px;
+}
+
+.site-footer h2 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.site-footer p {
+    margin: 8px 0;
+}
+
+.site-footer nav {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.site-footer a {
+    color: white;
+    font-weight: bold;
+}
+
+.footer-note {
+    max-width: 700px;
+    font-size: 14px;
+}
+
 /* Mobile — stack map and panel vertically */
 @media (max-width: 768px) {
     .map-wrapper {
@@ -253,6 +319,10 @@ main.home {
     .header nav.open {
         display: flex;
     }
+
+    .header nav select {
+        width: 90%;
+    }
 }
 
 /* Dark theme */
@@ -271,6 +341,10 @@ body.dark main.home {
 }
 
 body.dark .header {
+    background: #111;
+}
+
+body.dark .site-footer {
     background: #111;
 }
 
@@ -307,6 +381,15 @@ body.high-contrast .header {
     border-bottom: 2px solid #fff;
 }
 
+body.high-contrast .site-footer {
+    background: #000;
+    border-top: 2px solid #fff;
+}
+
+body.high-contrast .site-footer a {
+    color: #fff;
+}
+
 body.high-contrast .listing-card {
     background: #000;
     border: 2px solid #fff;
@@ -327,4 +410,80 @@ body.high-contrast .details-panel {
 body.high-contrast button {
     background: #fff;
     color: #000;
+}
+
+body.high-contrast button svg {
+	fill: #000;
+}
+
+#speechButton {
+	anchor-name: --speech-button;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+}
+
+#speechModal {
+	position-anchor: --speech-button;
+	top: anchor(bottom);
+	left: anchor(left);
+	margin: 8px 0 0 0;
+
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: 150ms;
+
+	border-radius: 4px;
+	border: 1px solid black;
+	padding: 10px;
+    background: white;
+    color: #222;
+    min-width: 220px;
+}
+
+#speechModal:popover-open {
+	opacity: 1;
+	transform: translateY(0);
+	visibility: visible;
+}
+
+.speech-controls {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.speech-settings {
+	margin-top: 12px;
+	max-width: 420px;
+}
+
+.speech-controls label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.speech-controls input,
+.speech-controls select,
+.speech-controls button {
+    margin: 0;
+}
+
+.speech-controls input[type="checkbox"] {
+    width: auto;
+}
+
+body.dark #speechModal {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #eee;
+}
+
+body.high-contrast #speechModal {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
 }

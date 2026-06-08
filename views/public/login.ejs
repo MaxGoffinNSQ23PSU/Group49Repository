@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title><%= title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title %> | Ladywood Food Banks</title>
 	<link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
@@ -10,21 +11,16 @@
 <%- include('../partials/header') %>
 
 <main>
-	<div style="text-align: center;"><h1><%= title %></h1></div>
-    
-    <div class="loginBox">
-			<input type = "email" id="login" placeholder="Email" required><br>
-			<input type = "password" id="password" placeholder="Password" required><br>
-			<input type="submit" id="LoginButton" class="btn" value="Login"><br>
+	<h1 style="text-align: center;"><%= title %></h1>
+	<div class="loginBox">
+		<input type = "email" id="login" placeholder="Email" required><br>
+		<input type = "password" id="password" placeholder="Password" required><br>
+		<input type="submit" id="LoginButton" class="btn" value="Login"><br>
 	</div>
-	
-
 </main>
-
-
 
 <%- include('../partials/footer') %>
 
-<script src="/js/script.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>

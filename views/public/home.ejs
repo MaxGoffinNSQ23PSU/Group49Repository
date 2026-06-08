@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%= title %> | Ladywood Food Banks</title>
 	<link rel="stylesheet" href="/css/stylesheet.css">
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -32,7 +33,6 @@
 
 <%- include('../partials/footer') %>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 	// Pass food bank data from the server into a JS variable
 	// The route queried the database and passed this array to the view
@@ -134,13 +134,11 @@
 	// Tracks the user's location marker so it can be removed before placing a new one
 	let userMarker = null;
 
-	document.querySelector('.burger').addEventListener('click', () => {
-	document.querySelector('.header nav').classList.toggle('open');
-	});
-
 	window.addEventListener('resize', () => {
-	map.invalidateSize();
+		map.invalidateSize();
 	});
 </script>
+
+<script src="/js/app.js"></script>
 </body>
 </html>
