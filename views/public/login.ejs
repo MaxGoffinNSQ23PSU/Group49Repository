@@ -11,15 +11,17 @@
 <%- include('../partials/header') %>
 
 <main>
-	
-	<h1 style="text-align: center;"><%= title %></h1>
-	<div class="container">
-		<div class="loginBox">
-			<input type = "email" id="login" placeholder="Email" required><br>
-			<input type = "password" id="password" placeholder="Password" required><br>
-			<input type="submit" id="LoginButton" class="btn" value="Login"><br>
+		
+		<h1 class="centered-title"><%= title %></h1>
+		<div class="container">
+			<form class="loginBox" action="/login" method="POST">
+				<label for="login">Email</label>
+				<input type="email" id="login" name="email" autocomplete="email" required>
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" autocomplete="current-password" required>
+				<input type="submit" id="LoginButton" class="btn" value="Login">
+			</form>
 		</div>
-	</div>
 </main>
 
 <%- include('../partials/footer') %>

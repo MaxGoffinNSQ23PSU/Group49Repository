@@ -3,6 +3,21 @@ import pool from "../db/index.js";
 
 const router = express.Router();
 
+// GET /foodbanks
+// Returns the food bank locations used by the home page map
+router.get("/", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT id, name, address, latitude, longitude FROM foodbanks"
+        );
+
+        res.json({ foodbanks: result.rows });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
 // GET /foodbanks/:id/data
 // Returns food bank details as JSON
 router.get('/:id/data', async (req, res) => {

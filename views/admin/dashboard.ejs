@@ -19,63 +19,68 @@
 	<% if (listings.length === 0) { %>
 		<p>No items listed yet.</p>
 	<% } else { %>
-		<table style="width:100%; border-collapse: collapse;">
+		<table class="stock-table">
+			<caption class="sr-only">Current stock items</caption>
 			<thead>
-				<tr style="background:#7b1e5a; color:white;">
-					<th style="padding:10px; text-align:left;">Item</th>
-					<th style="padding:10px; text-align:left;">Quantity</th>
-					<th style="padding:10px; text-align:left;">Unit</th>
-					<th style="padding:10px; text-align:left;">Actions</th>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">Unit</th>
+					<th scope="col">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% listings.forEach(item => { %>
-				<tr style="border-bottom: 1px solid #ddd;">
-	<td style="padding:10px;"><%= item.item_name %></td>
-	<td style="padding:10px;">
-		<form action="/admin/stock/edit/<%= item.id %>" method="POST">
-			<input type="number" name="quantity" value="<%= item.quantity %>" min="0"
-				style="width:80px; padding:6px; margin-bottom:8px;">
-			<div>
-				<% tags.forEach(tag => { %>
-					<label style="margin-right:10px;">
-						<input type="checkbox" name="tag_ids" value="<%= tag.id %>"
-							<%= item.tag_ids.includes(tag.id) ? 'checked' : '' %>>
-						<%= tag.tag_name %>
-					</label>
-				<% }) %>
-			</div>
-			<button type="submit" style="margin-top:8px;">Save</button>
-		</form>
-	</td>
-	<td style="padding:10px;"><%= item.unit || '—' %></td>
-	<td style="padding:10px;">
-		<form action="/admin/stock/delete/<%= item.id %>" method="POST"
-			onsubmit="return confirm('Delete this item?')">
-			<button type="submit" style="background:#c0392b;">Delete</button>
-		</form>
-	</td>
-</tr>
+				<tr>
+					<td><%= item.item_name %></td>
+					<td>
+						<form action="/admin/stock/edit/<%= item.id %>" method="POST">
+							<label class="sr-only" for="quantity-<%= item.id %>">Quantity for <%= item.item_name %></label>
+							<input id="quantity-<%= item.id %>" class="stock-quantity" type="number" name="quantity" value="<%= item.quantity %>" min="0">
+							<fieldset class="tag-options">
+								<legend>Tags for <%= item.item_name %></legend>
+								<% tags.forEach(tag => { %>
+									<label>
+										<input type="checkbox" name="tag_ids" value="<%= tag.id %>"
+											<%= item.tag_ids.includes(tag.id) ? 'checked' : '' %>>
+										<%= tag.tag_name %>
+									</label>
+								<% }) %>
+							</fieldset>
+							<button class="save-button" type="submit" aria-label="Save <%= item.item_name %>">Save</button>
+						</form>
+					</td>
+					<td><%= item.unit || '—' %></td>
+					<td>
+						<form action="/admin/stock/delete/<%= item.id %>" method="POST"
+							onsubmit="return confirm('Delete this item?')">
+							<button class="delete-button" type="submit" aria-label="Delete <%= item.item_name %>">Delete</button>
+						</form>
+					</td>
+				</tr>
 				<% }) %>
 			</tbody>
 		</table>
 	<% } %>
 
 	<!-- Add new item -->
-	<h2 style="margin-top:40px;">Add New Item</h2>
+	<h2 class="section-heading">Add New Item</h2>
 	<form action="/admin/stock/add" method="POST">
-		<input type="text" name="item_name" placeholder="Item name (e.g. Baked Beans)" required>
-		<input type="number" name="quantity" placeholder="Quantity" min="0" required>
-		<input type="text" name="unit" placeholder="Unit (e.g. tins, kg) — optional">
-		<div style="margin-bottom:15px;">
-			<strong>Tags:</strong><br>
+		<label for="new-item-name">Item name</label>
+		<input id="new-item-name" type="text" name="item_name" placeholder="e.g. Baked Beans" required>
+		<label for="new-item-quantity">Quantity</label>
+		<input id="new-item-quantity" type="number" name="quantity" min="0" required>
+		<label for="new-item-unit">Unit optional</label>
+		<input id="new-item-unit" type="text" name="unit" placeholder="e.g. tins, kg">
+		<fieldset class="tag-options">
+			<legend>Tags</legend>
 			<% tags.forEach(tag => { %>
-				<label style="margin-right:10px;">
+				<label>
 					<input type="checkbox" name="tag_ids" value="<%= tag.id %>">
 					<%= tag.tag_name %>
 				</label>
 			<% }) %>
-		</div>
+		</fieldset>
 		<button type="submit">Add Item</button>
 	</form>
 

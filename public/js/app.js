@@ -1,11 +1,16 @@
 // Mobile
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.header nav');
+const burger = document.querySelector(".burger");
+const menu = document.querySelector(".header-menu");
 
-if (burger && nav) {
-  burger.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    burger.classList.toggle('open');
+if (burger && menu) {
+  function setMenuOpen(isOpen) {
+    menu.classList.toggle("open", isOpen);
+    burger.classList.toggle("open", isOpen);
+    burger.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  burger.addEventListener("click", () => {
+    setMenuOpen(!menu.classList.contains("open"));
   });
 }
 
@@ -13,12 +18,12 @@ if (burger && nav) {
 const themeSelects = document.querySelectorAll(".theme-select");
 
 function applyTheme(theme) {
-	document.body.classList.remove('dark', 'high-contrast');
+	document.body.classList.remove("dark", "high-contrast");
 
-	if (theme === 'dark') document.body.classList.add('dark');
-	if (theme === 'high_contrast') document.body.classList.add('high-contrast');
+	if (theme === "dark") document.body.classList.add("dark");
+	if (theme === "high_contrast") document.body.classList.add("high-contrast");
 
-	localStorage.setItem('theme', theme);
+	localStorage.setItem("theme", theme);
 
 	for (const select of themeSelects) {
 		select.value = theme;
@@ -31,18 +36,26 @@ for (const select of themeSelects) {
 	});
 }
 
-applyTheme(localStorage.getItem('theme') || 'light');
+applyTheme(localStorage.getItem("theme") || "light");
 
-// Google translate 
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {
-      pageLanguage: 'en',
-      includedLanguages: 'en,ur,pa,bn,so,pl',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    },
-    'google_translate_element'
-  );
+// Google translate
+window.googleTranslateElementInit = function () {
+	if (!window.google || !window.google.translate) return;
+
+	new window.google.translate.TranslateElement(
+		{
+			pageLanguage: "en",
+			includedLanguages: "en,ur,pa,bn,so,pl",
+			layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+		},
+		"google_translate_element"
+	);
+};
+
+if (document.getElementById("google_translate_element")) {
+	const translateScript = document.createElement("script");
+	translateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+	document.head.appendChild(translateScript);
 }
 
 // Text to speech, ref: https://github.com/mdn/dom-examples/blob/main/web-speech-api/speak-easy-synthesis
@@ -203,17 +216,27 @@ for (const speechStopButton of speechStopButtons) {
 	});
 }
 
-document.addEventListener("mouseover", (event) => {
+function speakReadableFromTarget(target) {
 	if (!supportsSpeech || !speechSettings.readOnHover) return;
 
-	const text = getHoverSpeechText(event.target).trim();
+	const text = getHoverSpeechText(target).trim();
 	if (!text) return;
 
 	synth.cancel();
 	synth.speak(createUtterance(text));
+}
+
+document.addEventListener("mouseover", (event) => {
+	speakReadableFromTarget(event.target);
+});
+
+document.addEventListener("focusin", (event) => {
+	speakReadableFromTarget(event.target);
 });
 
 document.addEventListener("selectionchange", () => {
+	if (!speechReadButtons[0]) return;
+
 	speechReadButtons[0].textContent = getSelectedText() 
 		? "Read Selection"
 		: "Read Page";

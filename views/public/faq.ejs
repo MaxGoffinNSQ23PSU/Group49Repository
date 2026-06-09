@@ -16,33 +16,17 @@
 	
 		<div class="faq-container">
 			<% faqs.forEach(faq => { %>
-				<div class="faq-item">
-					<button class="faq-question" onclick="toggleAnswer(this)">
+				<details class="faq-item">
+					<summary class="faq-question">
 						<%= faq.question %>
-						<span>+</span>
-					</button>
+					</summary>
 					<div class="faq-answer">
 						<p><%= faq.answer %></p>
 					</div>
-				</div>
+				</details>
 			<% }) %>
 		</div>
 	</main>
-	
-	<script>
-		function toggleAnswer(button) {
-			const answer = button.nextElementSibling;
-			const symbol = button.querySelector('span');
-	
-			if (answer.style.display === 'none' || answer.style.display === '') {
-				answer.style.display = 'block';
-				symbol.textContent = '-';
-			} else {
-				answer.style.display = 'none';
-				symbol.textContent = '+';
-			}
-		}
-	</script>
 	
 	<%- include('../partials/footer') %>
 

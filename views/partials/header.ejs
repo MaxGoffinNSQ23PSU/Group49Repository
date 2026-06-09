@@ -1,49 +1,49 @@
 <header class="header">
 	<a class="header-logo" href="/">Ladywood Food Banks</a>
-<div id="google_translate_element"></div>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	<div class="header-settings">
-		<button id="speechButton" popovertarget="speechModal" title="Text to Speech" aria-label="Text to Speech">
-			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-				<path d="M160-80q-33 0-56.5-23.5T80-160v-640q0-33 23.5-56.5T160-880h326l-80 80H160v640h440v-80h80v80q0 33-23.5 56.5T600-80H160Zm80-160v-80h280v80H240Zm0-120v-80h200v80H240Zm360 0L440-520H320v-200h120l160-160v520Zm80-122v-276q36 21 58 57t22 81q0 45-22 81t-58 57Zm0 172v-84q70-25 115-86.5T840-620q0-78-45-139.5T680-846v-84q104 27 172 112.5T920-620q0 112-68 197.5T680-310Z" />
-			</svg>
-		</button>
-		<form id="speechModal" class="speech-controls" popover>
-			<label>
-				Voice
-				<select class="speech-voice"></select>
-			</label>
-			<label>
-				Rate
-				<input class="speech-rate" type="range" min="0.5" max="2" step="0.1" value="1">
-				<span class="speech-rate-value">1</span>
-			</label>
-
-			<label>
-				Pitch
-				<input class="speech-pitch" type="range" min="0" max="2" step="0.1" value="1">
-				<span class="speech-pitch-value">1</span>
-			</label>
-			<label>
-				Read on hover
-				<input class="speech-read-hover" type="checkbox">
-			</label>
-			<button class="speech-read" type="button">Read page</button>
-			<button class="speech-stop" type="button">Stop</button>
-		</form>
-		<select class="theme-select" aria-label="Colour theme">
-			<option value="light">Light</option>
-			<option value="dark">Dark</option>
-			<option value="high_contrast">High Contrast</option>
-		</select>
+	<button class="burger" id="burger" aria-label="Menu" aria-controls="nav" aria-expanded="false">&#9776;</button>
+	<div class="header-menu">
+		<div class="header-settings">
+			<button id="speechButton" popovertarget="speechModal" title="Text to Speech" aria-label="Text to Speech">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+					<path d="M160-80q-33 0-56.5-23.5T80-160v-640q0-33 23.5-56.5T160-880h326l-80 80H160v640h440v-80h80v80q0 33-23.5 56.5T600-80H160Zm80-160v-80h280v80H240Zm0-120v-80h200v80H240Zm360 0L440-520H320v-200h120l160-160v520Zm80-122v-276q36 21 58 57t22 81q0 45-22 81t-58 57Zm0 172v-84q70-25 115-86.5T840-620q0-78-45-139.5T680-846v-84q104 27 172 112.5T920-620q0 112-68 197.5T680-310Z" />
+				</svg>
+				</button>
+				<div id="google_translate_element"></div>
+				<form id="speechModal" class="speech-controls" popover>
+					<label>
+						Voice
+						<select class="speech-voice"></select>
+				</label>
+				<label>
+					Rate
+					<input class="speech-rate" type="range" min="0.5" max="2" step="0.1" value="1">
+					<span class="speech-rate-value">1</span>
+				</label>
+				<label>
+					Pitch
+					<input class="speech-pitch" type="range" min="0" max="2" step="0.1" value="1">
+					<span class="speech-pitch-value">1</span>
+					</label>
+					<label>
+						Read on hover/focus
+						<input class="speech-read-hover" type="checkbox">
+					</label>
+				<button class="speech-read" type="button">Read page</button>
+				<button class="speech-stop" type="button">Stop</button>
+			</form>
+			<select class="theme-select" aria-label="Colour theme">
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+				<option value="high_contrast">High Contrast</option>
+			</select>
+		</div>
+		<nav class="nav" id="nav" aria-label="Main Navigation">
+			<a href="/">Map</a>
+			<a href="/donations">Donate</a>
+			<a href="/faq">FAQ</a>
+			<a href="/contact">Contact</a>
+			<a href="/admin/login">Login</a>
+			<a href="/settings">Settings</a>
+		</nav>
 	</div>
-	<button class="burger" id="burger" aria-label="Menu">&#9776;</button>
-	<nav class="nav" id="nav">
-		<a href="/">Map</a>
-		<a href="/donations">Donate</a>
-		<a href="/faq">FAQ</a>
-		<a href="/contact">Contact</a>
-		<a href="/admin/login">Login</a>
-		<a href="/settings">Settings</a>
-	</nav>
 </header>

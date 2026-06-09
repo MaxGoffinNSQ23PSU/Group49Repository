@@ -1,18 +1,9 @@
 import express from "express";
-import pool from "../db/index.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    try {
-        const result = await pool.query(
-            "SELECT id, name, address, latitude, longitude FROM foodbanks"
-        );
-        res.render("public/home", { title: "Home", foodbanks: result.rows });
-    } catch (err) {
-        console.error(err);
-        res.render("public/home", { title: "Home", foodbanks: [] });
-    }
+router.get("/", (req, res) => {
+    res.render("public/home", { title: "Home" });
 });
 
 
