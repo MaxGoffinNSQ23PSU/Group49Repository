@@ -38,7 +38,7 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement(
     {
       pageLanguage: 'en',
-      includedLanguages: 'en,es,fr,ar,ur,pl,ro',
+      includedLanguages: 'en,ur,pa,bn,so,pl',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     },
     'google_translate_element'
