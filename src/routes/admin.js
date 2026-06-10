@@ -11,6 +11,7 @@ function requireAdmin(req, res, next) {
 }
 
 router.get("/login", (req, res) => {
+	if (req.session.admin) return res.redirect("/admin/dashboard"); //Straight to Dashboard if logged in
     res.render("admin/login", { title: "Admin Login", error: null });
 });
 

@@ -42,7 +42,12 @@
 			<a href="/donations">Donate</a>
 			<a href="/faq">FAQ</a>
 			<a href="/contact">Contact</a>
-			<a href="/admin/login">Login</a>
+			<% if (admin) { %>
+				<a href="/admin/dashboard">Dashboard</a>
+				<a href="/admin/logout">Logout</a>
+			<% } else { %>
+				<a href="/admin/login">Login</a>
+			<% } %> 
 			<a href="/settings">Settings</a>
 		</nav>
 	</div>

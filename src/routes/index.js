@@ -25,14 +25,9 @@ router.get("/settings", (req, res) => {
     res.render("public/settings", { title: "Settings" });
 });
 
-
+//Login redirects straight to the Admin now instead of the old link
 router.get("/login", (req, res) => {
-    res.render("public/login", { title: "Login" });
-});
-
-router.post("/login", (req, res) => {
-    console.log(req.body);
-    res.redirect("/");
+    res.redirect("/admin/login");
 });
 
 router.get('/faq', (req, res) => {

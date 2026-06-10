@@ -19,6 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET || "changeme", resave: false, saveUninitialized: false }));
 
+//Lets the site know whether an admin is logged in.
+app.use((req, res, next) => {
+    res.locals.admin = req.session.admin || null;
+    next();
+});
+
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
 app.use("/foodbanks", foodbankRoutes);

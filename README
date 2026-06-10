@@ -1,1 +1,18 @@
+Ladywood Food Banks
+Group 49 
 
+This a web app that helps people in Ladywood, Birmingham find their nearest food bank, check what stock is available, and learn ho to donate. This also includes Food bank administrators who can log in to manage their own stock listings. 
+
+Features
+-Interactive map (Leaflet js) of all food banks in Ladywood, with address/postcode search and route preview to your nearest food bank
+-Live stock listings per food bank, with dietary tags
+-Admin dashboard — each food bank's administrator can log in and add, edit,
+or delete their own stock listings
+-Accessibility — text-to-speech with voice/rate/pitch controls, Google
+-Translate integration (most-spoken languages in Birmingham), light/dark/
+high-contrast themes, responsive collapsing navigation
+-FAQ and Donations pages for people who want to use or support food banks
+
+
+
+Need to finish this

@@ -292,15 +292,17 @@ main.home {
 .loginBox {
   	display: grid;
 	place-items: center;
-	margin: 64px;
+	margin: 64px auto;
 	border-style: solid;
 	border-radius: 100px;
 	border-width: 1.5px;
-	width: 500px;
+	width: min(500px, 90vw);
+	padding: 0 16px;
 
 }
 
-#login {
+#login,
+#admin-username {
 	width: 270px;
 	border-top: none;
 	border-left: none;
@@ -311,7 +313,8 @@ main.home {
 	margin-top: 96px;
 }
 
-#password{
+#password,
+#admin-password {
 	width: 270px;
 	border-top: none;
 	border-left: none;
