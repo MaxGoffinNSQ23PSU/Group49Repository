@@ -8,14 +8,66 @@
 </head>
 <body>
 
-<%- include('../partials/header') %>
+	<%- include('../partials/header') %>
 
-<main>
-	<h1><%= title %></h1>
-	<p>Page content goes here.</p>
-</main>
-
-<%- include('../partials/footer') %>
+	<main>
+		<h1>Donate to a Food Bank</h1>
+		<hr>
+	
+		<p>Select a food bank below to see what items they are currently requesting.</p>
+	
+		<div class="donation-select-wrapper">
+			<label for="foodbank-select">Choose a food bank:</label>
+			<select id="foodbank-select" onchange="showListings()">
+				<option value="">-- Select a food bank --</option>
+				<% foodbanks.forEach(fb => { %>
+					<option value="<%= fb.id %>"><%= fb.name %></option>
+				<% }) %>
+			</select>
+		</div>
+	
+		<div id="listings-container"></div>
+	
+		<div class="donation-note">
+			<p><strong>Please note:</strong> Any donations not listed above will be accepted or rejected at the discretion of the food bank.</p>
+		</div>
+	</main>
+	
+	<script>
+		const listings = <%- JSON.stringify(listings) %>;
+	
+		function showListings() {
+			const selectedId = parseInt(document.getElementById('foodbank-select').value);
+			const container = document.getElementById('listings-container');
+	
+			if (!selectedId) {
+				container.innerHTML = '';
+				return;
+			}
+	
+			const foodbankListings = listings.filter(l => l.foodbank_id === selectedId);
+	
+			if (foodbankListings.length === 0) {
+				container.innerHTML = '<p>No specific items listed — all donations welcome.</p>';
+				return;
+			}
+	
+			container.innerHTML = `
+				<h3>Requested Donations</h3>
+				${foodbankListings.map(item => `
+					<div class="listing-card">
+						<h4>${item.item_name}</h4>
+						${item.tags && item.tags[0] !== null
+							? `<div class="tags">${item.tags.map(tag =>
+								`<span class="tag">${tag}</span>`).join('')}</div>`
+							: ''}
+					</div>
+				`).join('')}
+			`;
+		}
+	</script>
+	
+	<%- include('../partials/footer') %>
 
 <script src="/js/app.js"></script>
 </body>

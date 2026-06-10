@@ -1,5 +1,5 @@
 import express from "express";
-
+import pool from "../db/index.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -17,8 +17,31 @@ router.post("/contact", (req, res) => {
     res.redirect("/contact");
 });
 
-router.get("/donations", (req, res) => {
-    res.render("public/donations", { title: "Donations" });
+router.get("/donations", async (req, res) => {
+    try {
+        const foodbanksResult = await pool.query(
+            "SELECT id, name FROM foodbanks ORDER BY name"
+        );
+
+        const listingsResult = await pool.query(`
+            SELECT fl.id, fl.foodbank_id, fl.item_name, fl.unit,
+                   array_agg(ft.tag_name) AS tags
+            FROM food_listings fl
+            LEFT JOIN listing_tags lt ON fl.id = lt.listing_id
+            LEFT JOIN food_tags ft ON lt.tag_id = ft.id
+            GROUP BY fl.id
+            ORDER BY fl.item_name
+        `);
+
+        res.render("public/donations", {
+            title: "Donations",
+            foodbanks: foodbanksResult.rows,
+            listings: listingsResult.rows
+        });
+    } catch (err) {
+        console.error(err);
+        res.render("public/donations", { title: "Donations", foodbanks: [], listings: [] });
+    }
 });
 
 router.get("/settings", (req, res) => {
