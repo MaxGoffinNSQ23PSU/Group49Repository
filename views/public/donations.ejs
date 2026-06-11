@@ -18,7 +18,7 @@
 	
 		<div class="donation-select-wrapper">
 			<label for="foodbank-select">Choose a food bank:</label>
-			<select id="foodbank-select" onchange="showListings()">
+			<select id="foodbank-select">
 				<option value="">-- Select a food bank --</option>
 				<% foodbanks.forEach(fb => { %>
 					<option value="<%= fb.id %>"><%= fb.name %></option>
@@ -26,49 +26,16 @@
 			</select>
 		</div>
 	
-		<div id="listings-container"></div>
+		<section id="listings-container" aria-label="Requested donation items" aria-live="polite" aria-busy="false"></section>
 	
 		<div class="donation-note">
 			<p><strong>Please note:</strong> Any donations not listed above will be accepted or rejected at the discretion of the food bank.</p>
 		</div>
 	</main>
-	
-	<script>
-		const listings = <%- JSON.stringify(listings) %>;
-	
-		function showListings() {
-			const selectedId = parseInt(document.getElementById('foodbank-select').value);
-			const container = document.getElementById('listings-container');
-	
-			if (!selectedId) {
-				container.innerHTML = '';
-				return;
-			}
-	
-			const foodbankListings = listings.filter(l => l.foodbank_id === selectedId);
-	
-			if (foodbankListings.length === 0) {
-				container.innerHTML = '<p>No specific items listed — all donations welcome.</p>';
-				return;
-			}
-	
-			container.innerHTML = `
-				<h3>Requested Donations</h3>
-				${foodbankListings.map(item => `
-					<div class="listing-card">
-						<h4>${item.item_name}</h4>
-						${item.tags && item.tags[0] !== null
-							? `<div class="tags">${item.tags.map(tag =>
-								`<span class="tag">${tag}</span>`).join('')}</div>`
-							: ''}
-					</div>
-				`).join('')}
-			`;
-		}
-	</script>
-	
+
 	<%- include('../partials/footer') %>
 
+<script src="/js/donations.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

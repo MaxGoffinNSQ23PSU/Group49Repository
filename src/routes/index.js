@@ -23,24 +23,43 @@ router.get("/donations", async (req, res) => {
             "SELECT id, name FROM foodbanks ORDER BY name"
         );
 
+        res.render("public/donations", {
+            title: "Donations",
+            foodbanks: foodbanksResult.rows
+        });
+    } catch (err) {
+        console.error(err);
+        res.render("public/donations", { title: "Donations", foodbanks: [] });
+    }
+});
+
+router.get("/donations/listings", async (req, res) => {
+    const foodbankIdParam = req.query.foodbank_id;
+
+    if (typeof foodbankIdParam !== "string" || !/^\d+$/.test(foodbankIdParam)) {
+        return res.status(400).json({ error: "A valid foodbank_id is required." });
+    }
+
+    const foodbankId = Number.parseInt(foodbankIdParam, 10);
+
+    try {
         const listingsResult = await pool.query(`
             SELECT fl.id, fl.foodbank_id, fl.item_name, fl.unit,
-                   array_agg(ft.tag_name) AS tags
+                   array_remove(array_agg(ft.tag_name), NULL) AS tags
             FROM food_listings fl
             LEFT JOIN listing_tags lt ON fl.id = lt.listing_id
             LEFT JOIN food_tags ft ON lt.tag_id = ft.id
+            WHERE fl.foodbank_id = $1
             GROUP BY fl.id
             ORDER BY fl.item_name
-        `);
+        `, [foodbankId]);
 
-        res.render("public/donations", {
-            title: "Donations",
-            foodbanks: foodbanksResult.rows,
+        res.json({
             listings: listingsResult.rows
         });
     } catch (err) {
         console.error(err);
-        res.render("public/donations", { title: "Donations", foodbanks: [], listings: [] });
+        res.status(500).json({ error: "Unable to load donation listings." });
     }
 });
 
