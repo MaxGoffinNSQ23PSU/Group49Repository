@@ -492,7 +492,8 @@ main.home {
 		padding: 0;
 	}
 }
-
+/* Claude supplied the css for the contrast themes - 
+Prompt "Please supply CSS styling to apply dark and high contrast themes to aid in accessibility" */
 /* Dark theme */
 body.dark {
     background: #1a1a1a;

@@ -15,6 +15,7 @@ router.get("/login", (req, res) => {
     res.render("admin/login", { title: "Admin Login", error: null });
 });
 
+//AI usage to create the secure login for hashing and comparing passwords to the database.
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
