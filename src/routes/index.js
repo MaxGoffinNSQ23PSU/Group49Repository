@@ -93,7 +93,19 @@ router.get('/faq', (req, res) => {
         {
             question: "What are the opening times?",
             answer: "Opening times vary between food banks. Click on any pin on the map to see that food bank's specific opening times."
-        }
+        },
+		{
+			question: "Do I need to register to use the website?",
+			answer: "No. You can browse food banks, opening times, and support services without creating an account."
+		},
+		{
+			question: "Can I access the website on my phone?",
+			answer: "Yes. The website is mobile-friendly and can be accessed from smartphones, tablets and computers."
+		},
+		{
+			question: "How does this website help reduce food waste?",
+			answer: "The platform connects food banks with local businesses that have surplus food, helping redistribute food that might otherwise be wasted."
+		}
     ];
 
     res.render('public/faq', { title: 'FAQ', faqs });
