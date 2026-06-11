@@ -101,6 +101,10 @@ router.get('/faq', (req, res) => {
 		{
 			question: "Can I access the website on my phone?",
 			answer: "Yes. The website is mobile-friendly and can be accessed from smartphones, tablets and computers."
+		},
+		{
+			question: "How does this website help reduce food waste?",
+			answer: "The platform connects food banks with local businesses that have surplus food, helping redistribute food that might otherwise be wasted."
 		}
     ];
 
