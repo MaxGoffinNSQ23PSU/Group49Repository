@@ -93,7 +93,11 @@ router.get('/faq', (req, res) => {
         {
             question: "What are the opening times?",
             answer: "Opening times vary between food banks. Click on any pin on the map to see that food bank's specific opening times."
-        }
+        },
+		{
+			question: "Do I need to register to use the website?",
+			answer: "No. You can browse food banks, opening times, and support services without creating an account."
+		}
     ];
 
     res.render('public/faq', { title: 'FAQ', faqs });
