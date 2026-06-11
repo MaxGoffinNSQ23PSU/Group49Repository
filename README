@@ -21,3 +21,10 @@ SESSION_SECRET=group49-secret
 PORT=3000
 
 Copy and paste this info into the .env, which is placed in the main file repository, then you will be able to access all the features of the website, the username is admin and the passowrd is admin. 
+
+to run the code put these in command line:
+npm install express ejs
+npm install pg dotenv
+npm install bcrypt express-session
+then on the command line type: node index.js
+then go to browser and type in url: http://localhost:3000/
