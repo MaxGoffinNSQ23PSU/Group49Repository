@@ -159,6 +159,8 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+	border-radius: 14px;
+
 }
 
 button:hover {
@@ -239,6 +241,18 @@ main.home {
     border-radius: 8px;
     padding: 16px;
 	list-style-type: none;
+}
+
+.donation-listings {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+.donation-listings > li {
+	margin-top: 0;
 }
 
 .tags {
@@ -796,4 +810,13 @@ body.high-contrast #speechModal {
 
 #listings-container {
     margin-top: 20px;
+}
+
+body.dark .donation-note {
+	background: #333;
+}
+
+body.high-contrast .donation-note {
+	background: #000;
+	border: 2px solid #fff;
 }
