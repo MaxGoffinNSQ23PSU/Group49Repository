@@ -97,6 +97,10 @@ router.get('/faq', (req, res) => {
 		{
 			question: "Do I need to register to use the website?",
 			answer: "No. You can browse food banks, opening times, and support services without creating an account."
+		},
+		{
+			question: "Can I access the website on my phone?",
+			answer: "Yes. The website is mobile-friendly and can be accessed from smartphones, tablets and computers."
 		}
     ];
 
