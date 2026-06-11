@@ -12,3 +12,12 @@ or delete their own stock listings
 -Translate integration (most-spoken languages in Birmingham), light/dark/
 high-contrast themes, responsive collapsing navigation
 -FAQ and Donations pages for people who want to use or support food banks
+
+
+
+To access the database and the admin login there is a need for an env file:
+DATABASE_URL=postgresql://neondb_owner:npg_sWTgdI9H4DJK@ep-curly-lake-abq6blnl-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+SESSION_SECRET=group49-secret
+PORT=3000
+
+Copy and paste this info into the .env, which is placed in the main file repository, then you will be able to access all the features of the website, the username is admin and the passowrd is admin. 
